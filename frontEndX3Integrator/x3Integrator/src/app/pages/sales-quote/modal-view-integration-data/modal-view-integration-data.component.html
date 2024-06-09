@@ -1,0 +1,25 @@
+<app-spinner-default></app-spinner-default>
+<p-toast></p-toast>
+<div div class="flex flex-column h-full">
+    <div class="flex-grow-1 overflow-hidden divEditCenter">
+        <p-scrollPanel styleClass="custom-scroll-panel">
+            <div class="formgrid grid">
+                <p-card header="{{'RequestBody.singular' | translate}}">
+                    <pre>{{ requestBody }}</pre>
+                    </p-card>
+            </div>
+            <div class="formgrid grid">
+                <p-card header="{{'ResponseBody.singular' | translate}}">
+                    <pre>{{ responseBody }}</pre>
+                    </p-card>
+            </div>
+        </p-scrollPanel>
+    </div>
+    <div class="flex divEditBottom">
+        <div class="flex justify-content-end flex-wrap  w-full">
+            <p-button icon="pi pi-trash" styleClass="p-button-danger" (onClick)="onClose()" ></p-button>
+            <p-button icon="pi pi-save" styleClass="p-button-success" ></p-button>
+            <p-button icon="pi pi-sign-in" ></p-button>
+        </div>
+    </div>
+</div>

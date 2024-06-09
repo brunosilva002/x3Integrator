@@ -1,0 +1,32 @@
+<app-spinner-default></app-spinner-default>
+<p-toast></p-toast>
+<form [formGroup]="form">
+    <div class="grid justify-content-center mt-8">
+        <div class="col-10 sm:col-6">
+            <p-card >
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9YmhqEWiKSd4z-sIuyKAMdIraNmbxhU1SppbuOzVnAQ&s" />
+                </ng-template>
+                <div class="formgrid grid">
+                    <div class="flex flex-column col-12 pb-5">
+                        <label for="firstname2">Email</label>
+                        <input pInputText id="username" formControlName="email" (keyup.enter)="onLogin()"/>
+                    </div>
+                    <div class="flex flex-column col-12 pb-5">
+                        <label for="username">Senha</label>
+                        <input pInputText id="username" formControlName="password" (keyup.enter)="onLogin()" />
+                    </div>
+                    <div class="field col-12">
+                        <div class="pb-2">
+                            <div class="pt-5">
+                                <p-button label="Login"  [raised]="true" severity="help" [style]="{width:'100%'}"
+                                    (onClick)="onLogin()"
+                                ></p-button>
+                            </div>  
+                        </div>   
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>    
+</form>

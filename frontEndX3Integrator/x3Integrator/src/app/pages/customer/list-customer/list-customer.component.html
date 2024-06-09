@@ -1,0 +1,64 @@
+<app-spinner-default></app-spinner-default>
+<p-toast></p-toast>
+
+<div class="flex flex-column h-screen ">
+    <div class="flex justify-content-between divEditTop">
+        <div class="flex">
+            <app-main-menu class="align-self-center"></app-main-menu>
+            <p class="text-2xl font-bold m-2 align-self-center">{{'Customer.plural' | translate}}</p>
+        </div>
+        <div class="flex">
+            <p-button icon="pi pi-plus" severity="help" class="mr-2" (onClick)="onNewRegister()"></p-button>          
+        </div>
+    </div>
+    <div class="flex-grow-1 overflow-hidden divEditCenter">
+        <p-table 
+        styleClass="p-datatable-striped"
+        [value]="customerList" 
+        selectionMode="single"
+        [(selection)]="selectCustomer" 
+        (onRowSelect)="onRowSelect($event)"
+        dataKey="cdnCustomer"
+        [scrollable]="true" scrollHeight="calc(100vh - 200px)" 
+        [resizableColumns]="true"  
+        [paginator]="true"
+        [rows]="paginationRows"
+        currentPageReportTemplate="{{'Showing' | translate}} {first} {{'toAte' | translate}} {last} {{'ofDe' | translate}} {totalRecords} {{'Record.plural' | translate }}"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="environment.rowsPerPageOptions"
+        [rows]="environment.rowsInitial"
+        [totalRecords]="paginationTotal"
+        (onLazyLoad)="onLazyLoad($event)"
+        [lazy]="true"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="cdnX3Customer"        pResizableColumn>{{'Code.singular'   | translate }}<p-sortIcon field="cdnX3Customer"></p-sortIcon></th>
+                    <th pSortableColumn="razaoSocial"         pResizableColumn>{{'Name.singular'   | translate }}<p-sortIcon field="razaoSocial"></p-sortIcon></th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="cdnX3Customer"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="razaoSocial"></p-columnFilter>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr [pSelectableRow]="customer">
+                    <td style="width:30%">{{ customer.cdnX3Customer }}</td>
+                    <td>{{ customer.razaoSocial }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="flex divEditBottom">
+        <div class="flex justify-content-end flex-wrap  w-full">
+            <p-button icon="pi pi-trash" styleClass="p-button-danger"></p-button>
+            <p-button icon="pi pi-save" styleClass="p-button-success" ></p-button>
+            <p-button icon="pi pi-sign-in" ></p-button>
+        </div>
+    </div>
+</div>
+

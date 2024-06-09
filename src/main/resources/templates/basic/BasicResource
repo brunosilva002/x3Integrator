@@ -1,0 +1,64 @@
+package br.brn.x3Integrator.rest;
+
+import br.brn.x3Integrator.dto.BasicDTO;
+import br.brn.x3Integrator.dto.ResponseDTO;
+import br.brn.x3Integrator.service.BasicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping(value = "/api/v1/basic")
+public class BasicResource extends BaseResource {
+
+    @Autowired
+    BasicService basicService;
+
+    @PostMapping("/save")
+    public ResponseEntity<ResponseDTO<BasicDTO>> save (@RequestBody BasicDTO basicDTO){
+        return (ResponseEntity<ResponseDTO<BasicDTO>>) findCodeReturn(basicService.save(basicDTO));
+    }
+
+    @GetMapping("/obtain")
+    public ResponseEntity<ResponseDTO<BasicDTO>> obtain (@RequestParam Long cdnBasic){
+        return (ResponseEntity<ResponseDTO<BasicDTO>>) findCodeReturn(basicService.obtain(cdnBasic));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> delete (@RequestParam Long cdnBasic){
+        return (ResponseEntity<ResponseDTO>) findCodeReturn(basicService.delete(cdnBasic));
+    }
+
+    @GetMapping("/pagination")
+    ResponseEntity<ResponseDTO<Page<BasicDTO>>> pagination(@RequestParam(name= "page", defaultValue = "0") Integer page,
+                               @RequestParam(name= "pageSize", defaultValue = "10") Integer pageSize,
+                               @RequestParam(name= "sortBy", defaultValue = "cdnBasic") String sortBy,
+                               @RequestParam(name= "direction", defaultValue = "DESC") String direction,
+                               @RequestParam(name = "filter",required = false) Long filter) {
+        return (ResponseEntity<ResponseDTO<Page<BasicDTO>>>) findCodeReturn(basicService.pagination(page,pageSize,sortBy,direction,filter));
+    }
+
+    @PostMapping("/paginationFull")
+    ResponseEntity<ResponseDTO<Page<BasicDTO>>> paginationFull(   @RequestParam(name= "page", defaultValue = "0") Integer page,
+                                                                    @RequestParam(name= "pageSize", defaultValue = "10") Integer pageSize,
+                                                                    @RequestParam(name= "sortBy", defaultValue = "cdnBasic") String sortBy,
+                                                                    @RequestParam(name= "direction", defaultValue = "DESC") String direction,
+                                                                    @RequestBody Map<String, Object> filterMap) {
+        return (ResponseEntity<ResponseDTO<Page<BasicDTO>>>) findCodeReturn(basicService.paginationFull(page,pageSize,sortBy,direction,filterMap));
+    }
+
+    @PostMapping("/listAll")
+    public ResponseEntity<ResponseDTO<List<BasicDTO>>> listAll (){
+        return (ResponseEntity<ResponseDTO<List<BasicDTO>>>) findCodeReturn(basicService.listAll());
+    }
+
+    @PostMapping("/listExample")
+    public ResponseEntity<ResponseDTO<List<BasicDTO>>> listExample (@RequestBody BasicDTO basicDTO){
+        return (ResponseEntity<ResponseDTO<List<BasicDTO>>>) findCodeReturn(basicService.listExample(basicDTO));
+    }
+
+}

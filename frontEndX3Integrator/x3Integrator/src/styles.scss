@@ -1,0 +1,160 @@
+@import 'primeflex/primeflex.scss';
+@import 'themes/superior/superior-light/theme.scss';
+
+:root {
+    --variavel-comum: 78.5vh;
+    --lockedCollor: #ff6a6a;
+    --corPrincipal: #CF4520;
+    --textoPrincipal: #f1f1f1;
+    --backGroundColor:#F9F9F9;
+  }
+  
+  @media (max-width: $sm) {
+    :root {
+      --variavel-comum: 75.5vh;
+    }
+  }
+/* You can add global styles to this file, and also import other style files */
+.p-scrollpanel-bar  {
+    background-color: #3498db; /* cor da barra de rolagem */
+}
+
+html {
+    font-size: 12px; /* Defina o tamanho desejado, por exemplo, 16 pixels */
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    margin: 0;
+    background-color: #fffdfa;
+    padding: 0; 
+    height: 100dvh
+}
+
+
+.p-tabview .p-tabview-panels{
+    background-color: rgb(252, 252, 252);
+}
+
+.p-component .p-inputtext{
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem !important;
+}
+
+.p-component .p-calendar{
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem !important;
+}
+
+.p-component .p-calendar button{
+    height: 1.9rem;
+}
+
+.p-datatable .p-datatable-tbody > tr > td{
+    @media (max-width: $sm){
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem  !important;
+    }
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+}
+
+.formgrid >div{
+    margin-bottom: 1rem;
+}
+
+.p-tabview-panel{
+    padding: 0 !important;
+}
+.p-card-content{
+    padding: 0%;
+}
+
+.p-scrollPanel{
+    width: '100%' !important;
+    height: '78.5vh' !important;
+}
+
+.p-component .p-calendar{
+    width: -webkit-fill-available;
+    padding: 0.25rem 0rem 0.25rem 0rem !important;
+}
+
+.custom-scroll-panel {
+    width: 100%;
+    height: 30vh;
+    @media (max-width: $sm) {
+        height: 45vh;
+    }
+}
+
+.divPrincipal{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 50px 1fr 100px; /* Define três linhas - 50px, restante da página, 100px */
+    min-height: 100%; /* Garante que o layout ocupe pelo menos 100% da altura da janela de visualização */
+}
+
+.divEditTop{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);  
+    margin: 5px 5px 0px 5px; 
+    padding: 5px;
+    border-radius: 10px; 
+    background-color: $primaryColor;
+    color: var(--textoPrincipal);
+}
+
+.divEditBottom{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 0 5px 5px 5px;  
+    border-radius: 10px; 
+    padding: 5px;
+    overflow: hidden;
+    background-color: $secundaryColor;
+}
+
+.divEditCenter{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+    margin: 10px;  
+    border-radius: 10px;
+    position: relative;
+}
+
+.divEditCenterScroll{
+    height: calc(100dvh - 200px);
+}
+
+.p-dropdown{
+    width: 100%;
+}
+
+.p-fieldset{
+    margin-bottom: 1rem;
+    min-width: auto;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+    background: #fffefc;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+    background: #fffaf4;
+}
+
+.p-autocomplete{
+    width: 100%;
+}
+.p-autocomplete button{
+    height: 1.9rem;
+}
+
+.p-overlaypanel-content{
+    padding: 0;
+}
+
+.p-overlaypanel-content>h4{
+    margin: .75rem 1rem .75rem 1rem;
+}
+
+span.p-inputnumber.p-component {
+    width: 100%;
+}
+

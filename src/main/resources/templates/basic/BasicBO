@@ -1,0 +1,177 @@
+package br.brn.x3Integrator.bo;
+
+import br.brn.x3Integrator.dto.BasicDTO;
+
+import br.brn.x3Integrator.mapper.CycleAvoidingMappingContext;
+import br.brn.x3Integrator.mapper.BasicMapper;
+import br.brn.x3Integrator.model.Basic;
+import br.brn.x3Integrator.repository.BasicRepository;
+import jakarta.persistence.criteria.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
+
+@Slf4j
+@Component
+public class BasicBO {
+
+    @Autowired
+    UtilBO utilBO;
+
+    @Autowired
+    BasicRepository basicRepository;
+
+    @Autowired
+    BasicMapper basicMapper;
+
+    public BasicDTO save(BasicDTO basicDTO) throws IllegalAccessException {
+
+        Basic basic = basicMapper.toEntity(basicDTO, new CycleAvoidingMappingContext());
+
+        utilBO.assingObjectToList(basic, "basic");
+
+        basicRepository.save(basic);
+
+        utilBO.entityToDtoCustom(basic, basicDTO, new ArrayList<>());
+
+        return basicDTO;
+
+    }
+
+    public BasicDTO obtain(Long cdnBasic) {
+        Basic basic = new Basic();
+
+        basic = basicRepository.getReferenceById(cdnBasic);
+
+        BasicDTO basicDTO = new BasicDTO(); //basicMapper.toDto(basic, new CycleAvoidingMappingContext());
+
+        utilBO.entityToDtoCustom(basic, basicDTO, new ArrayList<>());
+
+        return basicDTO;
+    }
+
+    public void delete(Long cdnBasic) {
+        Basic basic = new Basic(cdnBasic);
+        utilBO.checkRelationship(basic,cdnBasic);
+        basicRepository.deleteById(cdnBasic);
+
+    }
+
+    public Page<BasicDTO> pagination(Integer page, Integer pageSize, String sortBy, String direction, Long filter) {
+
+        Basic basic = new Basic();
+        return basicRepository
+                .findAll(Example.of(basic),
+                        PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy)))
+                .map(x -> {
+                    BasicDTO basicDTOAux = new BasicDTO();
+                    utilBO.entityToDtoCustom(x, basicDTOAux, new ArrayList<>());
+                    return basicDTOAux;
+                });
+    }
+
+    public List<BasicDTO> listAll() {
+        List<Basic> basic = new ArrayList<>();
+
+        basic = basicRepository.findAll();
+
+        //List<BasicDTO> basicDTO = basicMapper.toDto(basic, new CycleAvoidingMappingContext());
+        List<BasicDTO> basicDTOList = new ArrayList<>();
+        basic.forEach( t->{
+            BasicDTO basicDTOAux = new BasicDTO();
+            utilBO.entityToDtoCustom(t, basicDTOAux, new ArrayList<>());
+            basicDTOList.add(basicDTOAux);
+        });
+
+        return basicDTOList;
+    }
+
+    public Object listExample(BasicDTO basicDTO) {
+        List<Basic> basic = new ArrayList<>();
+
+        Basic basicExemple = basicMapper.toEntity(basicDTO, new CycleAvoidingMappingContext());
+
+        basic = basicRepository.findAll(Example.of(basicExemple));
+
+        List<BasicDTO> basicDTOList = new ArrayList<>();
+        basic.forEach( t->{
+            BasicDTO basicDTOAux = new BasicDTO();
+            utilBO.entityToDtoCustom(t, basicDTOAux, new ArrayList<>());
+            basicDTOList.add(basicDTOAux);
+        });
+
+        return basicDTOList;
+    }
+
+    public Page<BasicDTO> paginationFull(Integer page, Integer pageSize, String sortBy, String direction, Map<String, Object> filterMap) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+        Page<BasicDTO> basicDTOPage = null;
+
+        Specification<Basic> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            for (Map.Entry<String, Object> entry : filterMap.entrySet()) {
+                String[] propriedades = entry.getKey().split("\\.");
+                String valor = "";
+                String modo = "";
+                Path<?> path = root;
+                if (propriedades.length > 1) {
+                    for (String propriedade : propriedades) {
+                        path = path.get(propriedade);
+                    }
+                } else {
+                    path = root.get(entry.getKey());
+                }
+                for (Map.Entry<String, Object> entry1 : ((Map<String, Object>) entry.getValue()).entrySet()) {
+                    if (entry1.getKey().equals("matchMode")) {
+                        modo = entry1.getValue().toString();
+                    } else if (entry1.getKey().equals("value")) {
+                        if (Objects.nonNull(entry1.getValue()))
+                            valor = entry1.getValue().toString();
+                        else
+                            valor = null;
+                    }
+                }
+                if (Objects.nonNull(valor)) {
+                    switch (modo) {
+                        case "startsWith":
+                            predicates.add(criteriaBuilder.like((Expression<String>) path, valor + "%"));
+                            break;
+                        case "endsWith":
+                            predicates.add(criteriaBuilder.like((Expression<String>) path, "%" + valor));
+                            break;
+                        case "equals":
+                            predicates.add(criteriaBuilder.equal(path, valor));
+                            break;
+                        case "notEquals":
+                            predicates.add(criteriaBuilder.notEqual(path, valor));
+                            break;
+                        case "notContains":
+                            predicates.add(criteriaBuilder.notLike((Expression<String>) path, "%" + valor + "%"));
+                            break;
+                        case "contains":
+                            predicates.add(criteriaBuilder.like((Expression<String>) path, "%" + valor + "%"));
+                            break;
+                    }
+                }
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+
+        basicDTOPage = basicRepository
+                .findAll(spec,
+                        PageRequest.of(page, pageSize, Sort.by(Sort.Direction.fromString(direction), sortBy)))
+                .map(x -> {
+                    BasicDTO basicDTOAux = new BasicDTO();
+                    utilBO.entityToDtoCustom(x, basicDTOAux, new ArrayList<>());
+                    return basicDTOAux;
+                });
+
+
+        return basicDTOPage;
+    }
+
+}

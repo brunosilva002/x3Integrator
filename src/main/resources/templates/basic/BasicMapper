@@ -1,0 +1,9 @@
+package br.brn.x3Integrator.mapper;
+
+import br.brn.x3Integrator.dto.BasicDTO;
+import br.brn.x3Integrator.model.Basic;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring", uses = {})
+public interface BasicMapper  extends EntityMapper<BasicDTO, Basic>{
+}

@@ -1,0 +1,38 @@
+<app-spinner-default></app-spinner-default>
+<p-toast></p-toast>
+<div class="flex flex-column h-screen">
+    <app-edit-header-div 
+        [labelDiv]="'Product.singular'">
+    </app-edit-header-div>
+    <div class="flex-grow-1 overflow-hidden divEditCenter">
+        <p-tabView>
+            <p-tabPanel header="{{'CommonData.singular' | translate}}">
+                <p-scrollPanel styleClass="divEditCenterScroll">
+                    <p-fieldset class="col-12" legend="{{'GeneralData.plural' | translate}}" [toggleable]="true">
+                        <div class="formgrid grid">
+                            <div class="flex flex-column col-6 md:col-1 ">
+                                <label for="firstname2">{{'idInternal.singular' | translate}}</label>
+                                <input pInputText [(ngModel)]="activeRegister.cdnProduct"/>
+                            </div>
+                            <div class="flex flex-column col-6 md:col-2 ">
+                                <label for="username">{{'Code.plural' | translate}}</label>
+                                <input pInputText [(ngModel)]="activeRegister.cdnX3Product"/>
+                            </div>
+                            <div class="flex flex-column col-6 md:col-2 ">
+                                <label for="username">{{'Description.plural' | translate}}</label>
+                                <input pInputText [(ngModel)]="activeRegister.description"/>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </p-scrollPanel>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+    <div class="flex divEditBottom">
+        <div class="flex justify-content-end flex-wrap  w-full">
+                <p-button icon="pi pi-trash" styleClass="p-button-danger" (onClick)="onDelete()"></p-button>
+                <p-button icon="pi pi-save" styleClass="p-button-success" (onClick)="onSave()"></p-button>
+            <p-button icon="pi pi-sign-in" (onClick)="onBack()"></p-button>
+        </div>
+    </div>
+</div>
