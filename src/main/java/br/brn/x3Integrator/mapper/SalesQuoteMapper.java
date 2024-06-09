@@ -1,7 +1,7 @@
 package br.brn.x3Integrator.mapper;
 
 import br.brn.x3Integrator.dto.SalesQuoteDTO;
-import br.brn.x3Integrator.model.SalesQuote;
+import br.brn.x3Integrator.model.masterDataBase.SalesQuote;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {})

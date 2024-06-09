@@ -1,13 +1,12 @@
 package br.brn.x3Integrator.bo;
 
 import br.brn.x3Integrator.dto.AuthenticationRequestDTO;
-import br.brn.x3Integrator.dto.AuthenticatoinResponseDTO;
 import br.brn.x3Integrator.dto.RegisterRequestDTO;
 import br.brn.x3Integrator.dto.UserDTO;
 import br.brn.x3Integrator.exception.BussineRuleException;
 import br.brn.x3Integrator.exception.ExceptionMessage;
-import br.brn.x3Integrator.model.User;
-import br.brn.x3Integrator.repository.UserRepository;
+import br.brn.x3Integrator.model.masterDataBase.User;
+import br.brn.x3Integrator.repository.masterDataBase.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

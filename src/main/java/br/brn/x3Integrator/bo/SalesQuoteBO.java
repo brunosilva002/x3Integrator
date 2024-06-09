@@ -5,9 +5,9 @@ import br.brn.x3Integrator.dto.SalesQuoteDTO;
 import br.brn.x3Integrator.enums.X3StatusIntegration;
 import br.brn.x3Integrator.mapper.CycleAvoidingMappingContext;
 import br.brn.x3Integrator.mapper.SalesQuoteMapper;
-import br.brn.x3Integrator.model.SalesQuote;
-import br.brn.x3Integrator.repository.SalesQuoteRepository;
-import br.brn.x3Integrator.repository.SalesQuoteX3LogRepository;
+import br.brn.x3Integrator.model.masterDataBase.SalesQuote;
+import br.brn.x3Integrator.repository.masterDataBase.SalesQuoteRepository;
+import br.brn.x3Integrator.repository.masterDataBase.SalesQuoteX3LogRepository;
 import br.brn.x3Integrator.x3objects.X3Envelope;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -38,9 +38,6 @@ public class SalesQuoteBO {
 
     @Autowired
     X3IntegrationBO x3IntegrationBO;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
 
     public SalesQuoteDTO save(SalesQuoteDTO salesquoteDTO) throws Exception {

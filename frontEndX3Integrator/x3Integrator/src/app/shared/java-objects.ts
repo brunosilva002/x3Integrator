@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 2.32.889 on 2024-06-01 16:59:16.
+// Generated using typescript-generator version 2.32.889 on 2024-06-09 13:12:02.
 
 export class AuthenticationRequestDTO {
     email?: string;
@@ -357,9 +357,9 @@ export interface Page<T> extends Slice<T> {
 }
 
 export interface Pageable {
-    unpaged?: boolean;
     paged?: boolean;
     pageNumber?: number;
+    unpaged?: boolean;
     pageSize?: number;
     offset?: number;
     sort?: Sort;
@@ -378,14 +378,14 @@ export class Sort implements Streamable<Order>, Serializable {
 }
 
 export interface Slice<T> extends Streamable<T> {
-    pageable?: Pageable;
+    first?: boolean;
     last?: boolean;
+    pageable?: Pageable;
     numberOfElements?: number;
     size?: number;
     content?: T[];
     number?: number;
     sort?: Sort;
-    first?: boolean;
 }
 
 export interface Streamable<T> extends Iterable<T>, Supplier<Stream<T>> {
@@ -397,16 +397,16 @@ export class Order implements Serializable {
     property?: string;
     ignoreCase?: boolean;
     nullHandling?: NullHandling;
-    ascending?: boolean;
     descending?: boolean;
+    ascending?: boolean;
 
     constructor(data: Order) {
         this.direction = data.direction;
         this.property = data.property;
         this.ignoreCase = data.ignoreCase;
         this.nullHandling = data.nullHandling;
-        this.ascending = data.ascending;
         this.descending = data.descending;
+        this.ascending = data.ascending;
     }
 }
 
@@ -429,6 +429,98 @@ export interface AutoCloseable {
 export interface HttpClient<O> {
 
     request<R>(requestConfig: { method: string; url: string; queryParams?: any; data?: any; copyFn?: (data: R) => R; options?: O; }): RestResponse<R>;
+}
+
+export class SalesQuoteProductResourceClient<O> {
+
+    constructor(protected httpClient: HttpClient<O>) {
+    }
+
+    /**
+     * HTTP DELETE /api/v1/salesquoteproduct/delete
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.delete
+     */
+    delete(queryParams: { cdnSalesQuoteProduct: number; }, options?: O): RestResponse<ResponseDTO<any>> {
+        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/salesquoteproduct/delete`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquoteproduct/listAll
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.listAll
+     */
+    listAll(options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/listAll`, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquoteproduct/listExample
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.listExample
+     */
+    listExample(salesquoteproductDTO: SalesQuoteProductDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/listExample`, data: salesquoteproductDTO, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/salesquoteproduct/obtain
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.obtain
+     */
+    obtain(queryParams: { cdnSalesQuoteProduct: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquoteproduct/obtain`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/salesquoteproduct/pagination
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.pagination
+     */
+    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteProductDTO>>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquoteproduct/pagination`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquoteproduct/paginationFull
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.paginationFull
+     */
+    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteProductDTO>>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquoteproduct/save
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.save
+     */
+    save(salesquoteproductDTO: SalesQuoteProductDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/save`, data: salesquoteproductDTO, options: options });
+    }
+}
+
+export class AuthenticationResourceClient<O> {
+
+    constructor(protected httpClient: HttpClient<O>) {
+    }
+
+    /**
+     * HTTP POST /api/v1/auth/authenticate
+     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.authenticate
+     */
+    authenticate(request: AuthenticationRequestDTO, options?: O): RestResponse<ResponseDTO<AuthenticatoinResponseDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/authenticate`, data: request, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/auth/reNewToken
+     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.reNewToken
+     */
+    reNewToken(queryParams: { email: string; }, options?: O): RestResponse<ResponseDTO<UserDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/reNewToken`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/auth/register
+     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.register
+     */
+    register(register: RegisterRequestDTO, options?: O): RestResponse<ResponseDTO<UserDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/register`, data: register, options: options });
+    }
 }
 
 export class CustomerResourceClient<O> {
@@ -506,6 +598,208 @@ export class CustomerResourceClient<O> {
      */
     updateX3CustomerLot(options?: O): RestResponse<ResponseDTO<CustomerDTO[]>> {
         return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/customer/updateX3CustomerLot`, options: options });
+    }
+}
+
+export class SiteResourceClient<O> {
+
+    constructor(protected httpClient: HttpClient<O>) {
+    }
+
+    /**
+     * HTTP DELETE /api/v1/site/delete
+     * Java method: br.brn.x3Integrator.rest.SiteResource.delete
+     */
+    delete(queryParams: { cdnSite: number; }, options?: O): RestResponse<ResponseDTO<any>> {
+        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/site/delete`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/site/listAll
+     * Java method: br.brn.x3Integrator.rest.SiteResource.listAll
+     */
+    listAll(options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/listAll`, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/site/listExample
+     * Java method: br.brn.x3Integrator.rest.SiteResource.listExample
+     */
+    listExample(siteDTO: SiteDTO, options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/listExample`, data: siteDTO, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/site/obtain
+     * Java method: br.brn.x3Integrator.rest.SiteResource.obtain
+     */
+    obtain(queryParams: { cdnSite: number; }, options?: O): RestResponse<ResponseDTO<SiteDTO>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/obtain`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/site/pagination
+     * Java method: br.brn.x3Integrator.rest.SiteResource.pagination
+     */
+    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SiteDTO>>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/pagination`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/site/paginationFull
+     * Java method: br.brn.x3Integrator.rest.SiteResource.paginationFull
+     */
+    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SiteDTO>>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/site/save
+     * Java method: br.brn.x3Integrator.rest.SiteResource.save
+     */
+    save(siteDTO: SiteDTO, options?: O): RestResponse<ResponseDTO<SiteDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/save`, data: siteDTO, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/site/updateX3SiteLot
+     * Java method: br.brn.x3Integrator.rest.SiteResource.updateX3SiteLot
+     */
+    updateX3SiteLot(options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/updateX3SiteLot`, options: options });
+    }
+}
+
+export class SalesQuoteResourceClient<O> {
+
+    constructor(protected httpClient: HttpClient<O>) {
+    }
+
+    /**
+     * HTTP DELETE /api/v1/salesquote/delete
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.delete
+     */
+    delete(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<any>> {
+        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/salesquote/delete`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquote/listAll
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.listAll
+     */
+    listAll(options?: O): RestResponse<ResponseDTO<SalesQuoteDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/listAll`, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquote/listExample
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.listExample
+     */
+    listExample(salesquoteDTO: SalesQuoteDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/listExample`, data: salesquoteDTO, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/salesquote/obtain
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.obtain
+     */
+    obtain(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/obtain`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/salesquote/pagination
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.pagination
+     */
+    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteDTO>>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/pagination`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquote/paginationFull
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.paginationFull
+     */
+    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteDTO>>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/salesquote/resendErp
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.resendErp
+     */
+    resendErp(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/resendErp`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/salesquote/save
+     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.save
+     */
+    save(salesquoteDTO: SalesQuoteDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/save`, data: salesquoteDTO, options: options });
+    }
+}
+
+export class ProductCustomerResourceClient<O> {
+
+    constructor(protected httpClient: HttpClient<O>) {
+    }
+
+    /**
+     * HTTP DELETE /api/v1/productcustomer/delete
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.delete
+     */
+    delete(queryParams: { cdnProductCustomer: number; }, options?: O): RestResponse<ResponseDTO<any>> {
+        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/productcustomer/delete`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/productcustomer/listAll
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.listAll
+     */
+    listAll(options?: O): RestResponse<ResponseDTO<ProductCustomerDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/listAll`, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/productcustomer/listExample
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.listExample
+     */
+    listExample(productcustomerDTO: ProductCustomerDTO, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO[]>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/listExample`, data: productcustomerDTO, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/productcustomer/obtain
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.obtain
+     */
+    obtain(queryParams: { cdnProductCustomer: number; }, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/productcustomer/obtain`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP GET /api/v1/productcustomer/pagination
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.pagination
+     */
+    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<ProductCustomerDTO>>> {
+        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/productcustomer/pagination`, queryParams: queryParams, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/productcustomer/paginationFull
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.paginationFull
+     */
+    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<ProductCustomerDTO>>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
+    }
+
+    /**
+     * HTTP POST /api/v1/productcustomer/save
+     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.save
+     */
+    save(productcustomerDTO: ProductCustomerDTO, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO>> {
+        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/save`, data: productcustomerDTO, options: options });
     }
 }
 
@@ -592,300 +886,6 @@ export class ProductResourceClient<O> {
      */
     updateX3ProductLot(options?: O): RestResponse<ResponseDTO<ProductDTO[]>> {
         return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/product/updateX3ProductLot`, options: options });
-    }
-}
-
-export class AuthenticationResourceClient<O> {
-
-    constructor(protected httpClient: HttpClient<O>) {
-    }
-
-    /**
-     * HTTP POST /api/v1/auth/authenticate
-     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.authenticate
-     */
-    authenticate(request: AuthenticationRequestDTO, options?: O): RestResponse<ResponseDTO<AuthenticatoinResponseDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/authenticate`, data: request, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/auth/reNewToken
-     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.reNewToken
-     */
-    reNewToken(queryParams: { email: string; }, options?: O): RestResponse<ResponseDTO<UserDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/reNewToken`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/auth/register
-     * Java method: br.brn.x3Integrator.rest.AuthenticationResource.register
-     */
-    register(register: RegisterRequestDTO, options?: O): RestResponse<ResponseDTO<UserDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/auth/register`, data: register, options: options });
-    }
-}
-
-export class SalesQuoteResourceClient<O> {
-
-    constructor(protected httpClient: HttpClient<O>) {
-    }
-
-    /**
-     * HTTP DELETE /api/v1/salesquote/delete
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.delete
-     */
-    delete(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<any>> {
-        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/salesquote/delete`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquote/listAll
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.listAll
-     */
-    listAll(options?: O): RestResponse<ResponseDTO<SalesQuoteDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/listAll`, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquote/listExample
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.listExample
-     */
-    listExample(salesquoteDTO: SalesQuoteDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/listExample`, data: salesquoteDTO, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/salesquote/obtain
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.obtain
-     */
-    obtain(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/obtain`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/salesquote/pagination
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.pagination
-     */
-    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteDTO>>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/pagination`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquote/paginationFull
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.paginationFull
-     */
-    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteDTO>>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/salesquote/resendErp
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.resendErp
-     */
-    resendErp(queryParams: { cdnSalesQuote: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquote/resendErp`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquote/save
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteResource.save
-     */
-    save(salesquoteDTO: SalesQuoteDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquote/save`, data: salesquoteDTO, options: options });
-    }
-}
-
-export class SiteResourceClient<O> {
-
-    constructor(protected httpClient: HttpClient<O>) {
-    }
-
-    /**
-     * HTTP DELETE /api/v1/site/delete
-     * Java method: br.brn.x3Integrator.rest.SiteResource.delete
-     */
-    delete(queryParams: { cdnSite: number; }, options?: O): RestResponse<ResponseDTO<any>> {
-        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/site/delete`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/site/listAll
-     * Java method: br.brn.x3Integrator.rest.SiteResource.listAll
-     */
-    listAll(options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/listAll`, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/site/listExample
-     * Java method: br.brn.x3Integrator.rest.SiteResource.listExample
-     */
-    listExample(siteDTO: SiteDTO, options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/listExample`, data: siteDTO, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/site/obtain
-     * Java method: br.brn.x3Integrator.rest.SiteResource.obtain
-     */
-    obtain(queryParams: { cdnSite: number; }, options?: O): RestResponse<ResponseDTO<SiteDTO>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/obtain`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/site/pagination
-     * Java method: br.brn.x3Integrator.rest.SiteResource.pagination
-     */
-    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SiteDTO>>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/pagination`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/site/paginationFull
-     * Java method: br.brn.x3Integrator.rest.SiteResource.paginationFull
-     */
-    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SiteDTO>>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/site/save
-     * Java method: br.brn.x3Integrator.rest.SiteResource.save
-     */
-    save(siteDTO: SiteDTO, options?: O): RestResponse<ResponseDTO<SiteDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/site/save`, data: siteDTO, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/site/updateX3SiteLot
-     * Java method: br.brn.x3Integrator.rest.SiteResource.updateX3SiteLot
-     */
-    updateX3SiteLot(options?: O): RestResponse<ResponseDTO<SiteDTO[]>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/site/updateX3SiteLot`, options: options });
-    }
-}
-
-export class ProductCustomerResourceClient<O> {
-
-    constructor(protected httpClient: HttpClient<O>) {
-    }
-
-    /**
-     * HTTP DELETE /api/v1/productcustomer/delete
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.delete
-     */
-    delete(queryParams: { cdnProductCustomer: number; }, options?: O): RestResponse<ResponseDTO<any>> {
-        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/productcustomer/delete`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/productcustomer/listAll
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.listAll
-     */
-    listAll(options?: O): RestResponse<ResponseDTO<ProductCustomerDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/listAll`, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/productcustomer/listExample
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.listExample
-     */
-    listExample(productcustomerDTO: ProductCustomerDTO, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/listExample`, data: productcustomerDTO, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/productcustomer/obtain
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.obtain
-     */
-    obtain(queryParams: { cdnProductCustomer: number; }, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/productcustomer/obtain`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/productcustomer/pagination
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.pagination
-     */
-    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<ProductCustomerDTO>>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/productcustomer/pagination`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/productcustomer/paginationFull
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.paginationFull
-     */
-    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<ProductCustomerDTO>>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/productcustomer/save
-     * Java method: br.brn.x3Integrator.rest.ProductCustomerResource.save
-     */
-    save(productcustomerDTO: ProductCustomerDTO, options?: O): RestResponse<ResponseDTO<ProductCustomerDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/productcustomer/save`, data: productcustomerDTO, options: options });
-    }
-}
-
-export class SalesQuoteProductResourceClient<O> {
-
-    constructor(protected httpClient: HttpClient<O>) {
-    }
-
-    /**
-     * HTTP DELETE /api/v1/salesquoteproduct/delete
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.delete
-     */
-    delete(queryParams: { cdnSalesQuoteProduct: number; }, options?: O): RestResponse<ResponseDTO<any>> {
-        return this.httpClient.request({ method: "DELETE", url: uriEncoding`api/v1/salesquoteproduct/delete`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquoteproduct/listAll
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.listAll
-     */
-    listAll(options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/listAll`, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquoteproduct/listExample
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.listExample
-     */
-    listExample(salesquoteproductDTO: SalesQuoteProductDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO[]>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/listExample`, data: salesquoteproductDTO, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/salesquoteproduct/obtain
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.obtain
-     */
-    obtain(queryParams: { cdnSalesQuoteProduct: number; }, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquoteproduct/obtain`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP GET /api/v1/salesquoteproduct/pagination
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.pagination
-     */
-    pagination(queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; filter?: number; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteProductDTO>>> {
-        return this.httpClient.request({ method: "GET", url: uriEncoding`api/v1/salesquoteproduct/pagination`, queryParams: queryParams, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquoteproduct/paginationFull
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.paginationFull
-     */
-    paginationFull(filterMap: { [index: string]: any }, queryParams?: { page?: number; pageSize?: number; sortBy?: string; direction?: string; }, options?: O): RestResponse<ResponseDTO<Page<SalesQuoteProductDTO>>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/paginationFull`, queryParams: queryParams, data: filterMap, options: options });
-    }
-
-    /**
-     * HTTP POST /api/v1/salesquoteproduct/save
-     * Java method: br.brn.x3Integrator.rest.SalesQuoteProductResource.save
-     */
-    save(salesquoteproductDTO: SalesQuoteProductDTO, options?: O): RestResponse<ResponseDTO<SalesQuoteProductDTO>> {
-        return this.httpClient.request({ method: "POST", url: uriEncoding`api/v1/salesquoteproduct/save`, data: salesquoteproductDTO, options: options });
     }
 }
 
@@ -1009,15 +1009,7 @@ class AxiosHttpClient implements HttpClient<Axios.AxiosRequestConfig> {
     }
 }
 
-export class AxiosCustomerResourceClient extends CustomerResourceClient<Axios.AxiosRequestConfig> {
-
-    constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
-        axiosInstance.defaults.baseURL = baseURL;
-        super(new AxiosHttpClient(axiosInstance));
-    }
-}
-
-export class AxiosProductResourceClient extends ProductResourceClient<Axios.AxiosRequestConfig> {
+export class AxiosSalesQuoteProductResourceClient extends SalesQuoteProductResourceClient<Axios.AxiosRequestConfig> {
 
     constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
         axiosInstance.defaults.baseURL = baseURL;
@@ -1033,7 +1025,7 @@ export class AxiosAuthenticationResourceClient extends AuthenticationResourceCli
     }
 }
 
-export class AxiosSalesQuoteResourceClient extends SalesQuoteResourceClient<Axios.AxiosRequestConfig> {
+export class AxiosCustomerResourceClient extends CustomerResourceClient<Axios.AxiosRequestConfig> {
 
     constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
         axiosInstance.defaults.baseURL = baseURL;
@@ -1049,6 +1041,14 @@ export class AxiosSiteResourceClient extends SiteResourceClient<Axios.AxiosReque
     }
 }
 
+export class AxiosSalesQuoteResourceClient extends SalesQuoteResourceClient<Axios.AxiosRequestConfig> {
+
+    constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
+        axiosInstance.defaults.baseURL = baseURL;
+        super(new AxiosHttpClient(axiosInstance));
+    }
+}
+
 export class AxiosProductCustomerResourceClient extends ProductCustomerResourceClient<Axios.AxiosRequestConfig> {
 
     constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
@@ -1057,7 +1057,7 @@ export class AxiosProductCustomerResourceClient extends ProductCustomerResourceC
     }
 }
 
-export class AxiosSalesQuoteProductResourceClient extends SalesQuoteProductResourceClient<Axios.AxiosRequestConfig> {
+export class AxiosProductResourceClient extends ProductResourceClient<Axios.AxiosRequestConfig> {
 
     constructor(baseURL: string, axiosInstance: Axios.AxiosInstance = axios.create()) {
         axiosInstance.defaults.baseURL = baseURL;

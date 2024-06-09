@@ -2,16 +2,16 @@ package br.brn.x3Integrator.bo;
 
 import br.brn.x3Integrator.dto.ProductDTO;
 import br.brn.x3Integrator.dto.ProductDTOList;
-import br.brn.x3Integrator.dto.ProductDTO;
 
 import br.brn.x3Integrator.enums.X3Class;
 import br.brn.x3Integrator.enums.X3Facet;
-import br.brn.x3Integrator.enums.X3PublicName;
 import br.brn.x3Integrator.enums.X3Representation;
 import br.brn.x3Integrator.mapper.CycleAvoidingMappingContext;
 import br.brn.x3Integrator.mapper.ProductMapper;
-import br.brn.x3Integrator.model.Product;
-import br.brn.x3Integrator.repository.ProductRepository;
+import br.brn.x3Integrator.model.masterDataBase.Product;
+import br.brn.x3Integrator.repository.demoDataBase.Product2Repository;
+import br.brn.x3Integrator.repository.masterDataBase.ProductRepository;
+import br.brn.x3Integrator.repository.x3DataBase.Product3Repository;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

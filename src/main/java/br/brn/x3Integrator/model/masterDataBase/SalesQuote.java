@@ -1,4 +1,4 @@
-package br.brn.x3Integrator.model;
+package br.brn.x3Integrator.model.masterDataBase;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

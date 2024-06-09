@@ -1,6 +1,6 @@
-package br.brn.x3Integrator.repository;
+package br.brn.x3Integrator.repository.masterDataBase;
 
-import br.brn.x3Integrator.model.User;
+import br.brn.x3Integrator.model.masterDataBase.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

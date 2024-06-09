@@ -1,37 +1,40 @@
-package br.brn.x3Integrator.model;
+package br.brn.x3Integrator.model.masterDataBase;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "x3_product")
+@Table(name = "x3_product_customer")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product implements Serializable {
+public class ProductCustomer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "cdn_product")
+    @Column (name = "cdn_product_customer")
     private Long cdnProduct;
 
-    @Column (name = "x3_itmref")
-    private String cdnX3Product;
+    @ManyToOne
+    @JoinColumn(name = "cdn_product", referencedColumnName = "cdn_product")
+    @Fetch(FetchMode.SELECT)
+    private Product product;
 
-    @Column (name = "x3_ydescsefaz")
-    private String description;
-
-    @Column (name = "x3_itmsta")
-    private String productStatus;
+    @ManyToOne
+    @JoinColumn(name = "cdn_customer", referencedColumnName = "cdn_customer")
+    @Fetch(FetchMode.SELECT)
+    private Customer customer;
 
     @Column (name = "creation_date")
     private LocalDateTime creationDate;
@@ -56,7 +59,7 @@ public class Product implements Serializable {
         this.updateDate = LocalDateTime.now();
     }
 
-    public Product(Long cdnProduct) {
+    public ProductCustomer(Long cdnProduct) {
         this.cdnProduct = cdnProduct;
     }
 }

@@ -1,35 +1,36 @@
-package br.brn.x3Integrator.model;
-
+package br.brn.x3Integrator.model.masterDataBase;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "x3_site")
+@Table(name="user")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Site implements Serializable {
+@NoArgsConstructor
+public class User {
 
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "cdn_site")
-    private Long cdnSite;
+    @Column(name = "cdn_user")
+    private Long cdnUser;
 
-    @Column(name ="x3_fcy")
-    private String cdnX3Site;
+    @Column (name = "email")
+    private String email;
+
+    @Column (name = "password")
+    private String password;
+
+    @Column (name = "name")
+    private String name;
+
+    @Column (name = "last_name")
+    private String lastName;
 
 
     @Column (name = "creation_date")
@@ -55,7 +56,4 @@ public class Site implements Serializable {
         this.updateDate = LocalDateTime.now();
     }
 
-    public Site(Long cdnCustomer) {
-        this.cdnSite = cdnSite;
-    }
 }

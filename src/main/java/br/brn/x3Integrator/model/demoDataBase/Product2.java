@@ -1,37 +1,37 @@
-package br.brn.x3Integrator.model;
+package br.brn.x3Integrator.model.demoDataBase;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="user")
+@Table(name = "x3_product1")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class Product2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cdn_user")
-    private Long cdnUser;
+    @Column (name = "cdn_product")
+    private Long cdnProduct;
 
-    @Column (name = "email")
-    private String email;
+    @Column (name = "x3_itmref")
+    private String cdnX3Product;
 
-    @Column (name = "password")
-    private String password;
+    @Column (name = "x3_ydescsefaz")
+    private String description;
 
-    @Column (name = "name")
-    private String name;
-
-    @Column (name = "last_name")
-    private String lastName;
-
+    @Column (name = "x3_itmsta")
+    private String productStatus;
 
     @Column (name = "creation_date")
     private LocalDateTime creationDate;
@@ -45,6 +45,9 @@ public class User {
     @Column (name = "update_user")
     private String updateUser;
 
+    @Column (name = "update_user3")
+    private String updateUser4;
+
     @PrePersist
     protected void onCreate() {
         this.creationDate = LocalDateTime.now();
@@ -56,4 +59,7 @@ public class User {
         this.updateDate = LocalDateTime.now();
     }
 
+    public Product2(Long cdnProduct) {
+        this.cdnProduct = cdnProduct;
+    }
 }

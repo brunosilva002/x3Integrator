@@ -4,8 +4,8 @@ import br.brn.x3Integrator.dto.SalesQuoteProductDTO;
 
 import br.brn.x3Integrator.mapper.CycleAvoidingMappingContext;
 import br.brn.x3Integrator.mapper.SalesQuoteProductMapper;
-import br.brn.x3Integrator.model.SalesQuoteProduct;
-import br.brn.x3Integrator.repository.SalesQuoteProductRepository;
+import br.brn.x3Integrator.model.masterDataBase.SalesQuoteProduct;
+import br.brn.x3Integrator.repository.masterDataBase.SalesQuoteProductRepository;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

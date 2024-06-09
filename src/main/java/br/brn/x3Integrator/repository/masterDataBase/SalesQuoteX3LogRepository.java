@@ -1,6 +1,6 @@
-package br.brn.x3Integrator.repository;
+package br.brn.x3Integrator.repository.masterDataBase;
 
-import br.brn.x3Integrator.model.SalesQuoteX3Log;
+import br.brn.x3Integrator.model.masterDataBase.SalesQuoteX3Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

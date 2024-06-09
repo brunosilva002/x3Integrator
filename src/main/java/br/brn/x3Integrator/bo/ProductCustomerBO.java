@@ -4,8 +4,8 @@ import br.brn.x3Integrator.dto.ProductCustomerDTO;
 
 import br.brn.x3Integrator.mapper.CycleAvoidingMappingContext;
 import br.brn.x3Integrator.mapper.ProductCustomerMapper;
-import br.brn.x3Integrator.model.ProductCustomer;
-import br.brn.x3Integrator.repository.ProductCustomerRepository;
+import br.brn.x3Integrator.model.masterDataBase.ProductCustomer;
+import br.brn.x3Integrator.repository.masterDataBase.ProductCustomerRepository;
 import jakarta.persistence.criteria.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
